@@ -1,0 +1,7 @@
+exclude = [
+    "migrations",
+    "**/settings.py",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "C90"]
