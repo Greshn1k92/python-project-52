@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.shortcuts import render
+from django.http import HttpResponse
 
 def index(request):
-    return render(request, 'index.html')
+    return HttpResponse('Hello! Welcome to the main page!')
 
 urlpatterns = [
     path('', index, name='index'),
