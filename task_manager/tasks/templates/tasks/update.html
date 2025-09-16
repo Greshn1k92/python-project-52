@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Изменение задачи{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Изменение задачи</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ form.name.id_for_label }}" class="form-label">Имя</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.description.id_for_label }}" class="form-label">Описание</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.status.id_for_label }}" class="form-label">Статус</label>
+            {{ form.status }}
+            {% if form.status.errors %}
+                <div class="text-danger">{{ form.status.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.executor.id_for_label }}" class="form-label">Исполнитель</label>
+            {{ form.executor }}
+            {% if form.executor.errors %}
+                <div class="text-danger">{{ form.executor.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.labels.id_for_label }}" class="form-label">Метки</label>
+            {{ form.labels }}
+            {% if form.labels.errors %}
+                <div class="text-danger">{{ form.labels.errors }}</div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+</div>
+{% endblock %}

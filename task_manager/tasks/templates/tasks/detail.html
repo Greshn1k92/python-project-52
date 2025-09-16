@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ task.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ task.name }}</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <p><strong>Описание:</strong> {{ task.description|default:"Не указано" }}</p>
+            <p><strong>Статус:</strong> {{ task.status.name }}</p>
+            <p><strong>Автор:</strong> {{ task.author.get_full_name|default:task.author.username }}</p>
+            <p><strong>Исполнитель:</strong> {{ task.executor.get_full_name|default:task.executor.username|default:"Не назначен" }}</p>
+            <p><strong>Дата создания:</strong> {{ task.created_at|date:"d.m.Y H:i" }}</p>
+            {% if task.labels.all %}
+                <p><strong>Метки:</strong>
+                    {% for label in task.labels.all %}
+                        <span class="badge bg-secondary">{{ label.name }}</span>
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            {% if task.author == user %}
+                <a href="{% url 'tasks:update_task' task.pk %}" class="btn btn-primary">Изменить</a>
+                <a href="{% url 'tasks:delete_task' task.pk %}" class="btn btn-danger">Удалить</a>
+            {% else %}
+                <p class="text-muted">Только автор может редактировать и удалять эту задачу</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
