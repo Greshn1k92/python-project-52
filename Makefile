@@ -4,6 +4,9 @@ install:
 dev-install:
 	uv sync --group dev
 
+makemigrations:
+	uv run python manage.py makemigrations
+
 migrate:
 	uv run python manage.py migrate
 
@@ -14,7 +17,7 @@ run:
 	uv run python manage.py runserver
 
 render-start:
-	uv run gunicorn task_manager.wsgi
+	uv run gunicorn wsgi
 
 build:
 	./build.sh
