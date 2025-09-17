@@ -5,27 +5,19 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.db.models import Q
+from django_filters.views import FilterView
 from .models import Task
 from .forms import TaskForm
+from .filters import TaskFilter
 
 
-class TaskListView(LoginRequiredMixin, ListView):
+class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
     template_name = 'tasks/tasks.html'
     context_object_name = 'tasks'
+    filterset_class = TaskFilter
     login_url = reverse_lazy('login')
-
-    def get_queryset(self):
-        queryset = Task.objects.all()
-        if self.request.GET.get('status'):
-            queryset = queryset.filter(status_id=self.request.GET.get('status'))
-        if self.request.GET.get('executor'):
-            queryset = queryset.filter(executor_id=self.request.GET.get('executor'))
-        if self.request.GET.get('label'):
-            queryset = queryset.filter(labels__id=self.request.GET.get('label'))
-        if self.request.GET.get('author'):
-            queryset = queryset.filter(author_id=self.request.GET.get('author'))
-        return queryset
+    paginate_by = 10
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
