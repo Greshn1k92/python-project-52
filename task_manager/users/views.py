@@ -35,35 +35,35 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserRegistrationForm
     template_name = 'users/update.html'
-    success_url = reverse_lazy('users')
+    success_url = reverse_lazy('users:users')
     success_message = 'Пользователь успешно изменен'
     login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.pk != self.get_object().pk:
             messages.error(request, 'У вас нет прав для изменения другого пользователя.')
-            return redirect('users')
+            return redirect('users:users')
         return super().dispatch(request, *args, **kwargs)
 
 
 class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = User
     template_name = 'users/delete.html'
-    success_url = reverse_lazy('users')
+    success_url = reverse_lazy('users:users')
     success_message = 'Пользователь успешно удален'
     login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.pk != self.get_object().pk:
             messages.error(request, 'У вас нет прав для изменения другого пользователя.')
-            return redirect('users')
+            return redirect('users:users')
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         user = self.get_object()
         if user.authored_tasks.exists() or user.assigned_tasks.exists():
             messages.error(request, 'Невозможно удалить пользователя, потому что он связан с задачами')
-            return redirect('users')
+            return redirect('users:users')
         return super().post(request, *args, **kwargs)
 
 

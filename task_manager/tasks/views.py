@@ -17,6 +17,7 @@ class TaskListView(LoginRequiredMixin, FilterView):
     filterset_class = TaskFilter
     login_url = reverse_lazy('login')
     paginate_by = 10
+    ordering = ['-created_at']
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
