@@ -24,7 +24,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         # Сохраняем пользователя, но НЕ входим в систему
-        user = form.save()
+        form.save()
         # Добавляем сообщение об успехе
         messages.success(self.request, self.success_message)
         # Не делаем автоматический вход - просто перенаправляем
@@ -41,7 +41,9 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.pk != self.get_object().pk:
-            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            messages.error(
+                request, 'У вас нет прав для изменения другого пользователя.'
+            )
             return redirect('users:users')
         return super().dispatch(request, *args, **kwargs)
 
@@ -55,14 +57,19 @@ class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.pk != self.get_object().pk:
-            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            messages.error(
+                request, 'У вас нет прав для изменения другого пользователя.'
+            )
             return redirect('users:users')
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         user = self.get_object()
         if user.authored_tasks.exists() or user.assigned_tasks.exists():
-            messages.error(request, 'Невозможно удалить пользователя, потому что он связан с задачами')
+            messages.error(
+                request,
+                'Невозможно удалить пользователя, потому что он связан с задачами'
+            )
             return redirect('users:users')
         return super().post(request, *args, **kwargs)
 

@@ -27,7 +27,7 @@
                     <select name="{{ filter.form.executor.name }}" id="{{ filter.form.executor.id_for_label }}" class="form-select">
                         <option value="">Все исполнители</option>
                         {% for choice in filter.form.executor.field.queryset %}
-                            <option value="{{ choice.id }}" {% if choice.id == filter.form.executor.value %}selected{% endif %}>{{ choice.get_full_name|default:choice.username }}</option>
+                            <option value="{{ choice.id }}" {% if choice.id == filter.form.executor.value %}selected{% endif %}>{% if choice.get_full_name %}{{ choice.get_full_name }}{% else %}{{ choice.username }}{% endif %}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -75,8 +75,8 @@
                     <td>{{ task.id }}</td>
                     <td><a href="{% url 'tasks:task_detail' task.pk %}">{{ task.name }}</a></td>
                     <td>{{ task.status.name }}</td>
-                    <td>{{ task.author.get_full_name|default:task.author.username }}</td>
-                    <td>{{ task.executor.get_full_name|default:task.executor.username|default:"Не назначен" }}</td>
+                    <td>{% if task.author.get_full_name %}{{ task.author.get_full_name }}{% else %}{{ task.author.username }}{% endif %}</td>
+                    <td>{% if task.executor %}{% if task.executor.get_full_name %}{{ task.executor.get_full_name }}{% else %}{{ task.executor.username }}{% endif %}{% else %}Не назначен{% endif %}</td>
                     <td>
                         {% for label in task.labels.all %}
                             <span class="badge bg-secondary me-1">{{ label.name }}</span>

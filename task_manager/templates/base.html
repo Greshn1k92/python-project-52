@@ -32,7 +32,7 @@
                         <a class="nav-link" href="/tasks/">Задачи</a>
                         <a class="nav-link" href="/statuses/">Статусы</a>
                         <a class="nav-link" href="/labels/">Метки</a>
-                        <span class="nav-link">Привет, {{ user.get_full_name|default:user.username|default:"Пользователь" }}!</span>
+                        <span class="nav-link">Привет, {% if user and user.get_full_name %}{{ user.get_full_name }}{% elif user and user.username %}{{ user.username }}{% else %}Пользователь{% endif %}!</span>
                         <form method="post" action="{% url 'logout' %}" style="display: inline;">
                             {% csrf_token %}
                             <button type="submit" class="nav-link btn btn-link" style="border: none; background: none; padding: 0;">Выход</button>

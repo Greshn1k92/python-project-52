@@ -9,8 +9,8 @@
         <div class="col-md-8">
             <p><strong>Описание:</strong> {{ task.description|default:"Не указано" }}</p>
             <p><strong>Статус:</strong> {{ task.status.name }}</p>
-            <p><strong>Автор:</strong> {{ task.author.get_full_name|default:task.author.username }}</p>
-            <p><strong>Исполнитель:</strong> {{ task.executor.get_full_name|default:task.executor.username|default:"Не назначен" }}</p>
+            <p><strong>Автор:</strong> {% if task.author.get_full_name %}{{ task.author.get_full_name }}{% else %}{{ task.author.username }}{% endif %}</p>
+            <p><strong>Исполнитель:</strong> {% if task.executor %}{% if task.executor.get_full_name %}{{ task.executor.get_full_name }}{% else %}{{ task.executor.username }}{% endif %}{% else %}Не назначен{% endif %}</p>
             <p><strong>Дата создания:</strong> {{ task.created_at|date:"d.m.Y H:i" }}</p>
             {% if task.labels.all %}
                 <p><strong>Метки:</strong>

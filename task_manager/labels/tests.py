@@ -48,7 +48,9 @@ class LabelCRUDTestCase(TestCase):
         label = Label.objects.create(name='Тестовая метка')
         self.client.login(username='testuser', password='testpass123')
         data = {'name': 'Обновленная метка'}
-        response = self.client.post(reverse('labels:update_label', args=[label.pk]), data)
+        response = self.client.post(
+            reverse('labels:update_label', args=[label.pk]), data
+        )
         self.assertEqual(response.status_code, 302)
         label.refresh_from_db()
         self.assertEqual(label.name, 'Обновленная метка')

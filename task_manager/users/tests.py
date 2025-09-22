@@ -24,7 +24,7 @@ class UserCRUDTestCase(TestCase):
             'password2': 'newpass123'
         }
         response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 302)  # Redirect after successful registration
+        self.assertEqual(response.status_code, 302)  # Redirect after success
         self.assertTrue(User.objects.filter(username='newuser').exists())
 
     def test_user_list_view(self):
@@ -59,14 +59,14 @@ class UserCRUDTestCase(TestCase):
         self.client.login(username='testuser', password='testpass123')
         url = reverse('users:update_user', kwargs={'pk': other_user.pk})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)  # Redirect due to unauthorized access
+        self.assertEqual(response.status_code, 302)  # Redirect unauthorized
 
     def test_user_delete(self):
         """Test user deletion (Delete)"""
         self.client.login(username='testuser', password='testpass123')
         url = reverse('users:delete_user', kwargs={'pk': self.user.pk})
         response = self.client.post(url)
-        self.assertEqual(response.status_code, 302)  # Redirect after successful deletion
+        self.assertEqual(response.status_code, 302)  # Redirect after deletion
         self.assertFalse(User.objects.filter(pk=self.user.pk).exists())
 
     def test_user_delete_unauthorized(self):
@@ -78,7 +78,7 @@ class UserCRUDTestCase(TestCase):
         self.client.login(username='testuser', password='testpass123')
         url = reverse('users:delete_user', kwargs={'pk': other_user.pk})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)  # Redirect due to unauthorized access
+        self.assertEqual(response.status_code, 302)  # Redirect unauthorized
 
     def test_login_redirect(self):
         """Test login redirects to home page"""
