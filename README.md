@@ -1,9 +1,9 @@
 # Task Manager
 
-[![CI](https://github.com/Greshn1k92/python-project-52/actions/workflows/ci.yml/badge.svg)](https://github.com/Greshn1k92/python-project-52/actions/workflows/ci.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Greshn1k92_python-project-52&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Greshn1k92_python-project-52)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Greshn1k92_python-project-52&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Greshn1k92_python-project-52)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Greshn1k92_python-project-52&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Greshn1k92_python-project-52)
+[![CI](https://github.com/Greshn1k92/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Greshn1k92/python-project-52/actions/workflows/hexlet-check.yml)
+[![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![Django](https://img.shields.io/badge/django-5.2-green.svg)](https://www.djangoproject.com/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Django-based task management system.
 
