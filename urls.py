@@ -19,12 +19,24 @@ from django.urls import path, include
 from django.shortcuts import render
 from django.contrib.auth import views as auth_views
 from task_manager.users.forms import UserLoginForm
+import rollbar
 
 def index(request):
     return render(request, 'index.html')
 
+def test_rollbar(request):
+    """Тестовая страница для проверки Rollbar"""
+    try:
+        # Генерируем тестовую ошибку
+        raise Exception("Тестовая ошибка для Rollbar")
+    except Exception as e:
+        # Отправляем ошибку в Rollbar
+        rollbar.report_exc_info()
+        return render(request, 'test_rollbar.html', {'error': str(e)})
+
 urlpatterns = [
     path('', index, name='home'),
+    path('test-rollbar/', test_rollbar, name='test_rollbar'),
     path('users/', include('task_manager.users.urls', namespace='users')),
     path('tasks/', include('task_manager.tasks.urls', namespace='tasks')),
     path('statuses/', include('task_manager.statuses.urls', namespace='statuses')),

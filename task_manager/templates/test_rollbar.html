@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Тест Rollbar{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Тест Rollbar</h1>
+    <div class="alert alert-info">
+        <h4>Ошибка отправлена в Rollbar!</h4>
+        <p><strong>Сообщение об ошибке:</strong> {{ error }}</p>
+        <p>Проверьте ваш аккаунт Rollbar для просмотра деталей ошибки.</p>
+    </div>
+    <a href="{% url 'home' %}" class="btn btn-primary">Вернуться на главную</a>
+</div>
+{% endblock %}
