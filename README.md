@@ -1,9 +1,6 @@
 # Task Manager
 
-[![CI](https://github.com/Greshn1k92/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Greshn1k92/python-project-52/actions/workflows/hexlet-check.yml)
-[![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
-[![Django](https://img.shields.io/badge/django-5.2-green.svg)](https://www.djangoproject.com/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![hexlet-check](https://github.com/Greshn1k92/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Greshn1k92/python-project-52/actions/workflows/hexlet-check.yml)
 
 Django-based task management system.
 
