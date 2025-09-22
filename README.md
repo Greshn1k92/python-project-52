@@ -11,6 +11,8 @@ Django-based task management system.
 
 🌐 **Live Application**: https://python-project-52-6zp9.onrender.com
 
+> **Note**: This project is part of the Hexlet Python course curriculum.
+
 ## Features
 
 - User authentication and authorization
