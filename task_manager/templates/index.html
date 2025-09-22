@@ -63,12 +63,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 mb-3">
+                <div class="col-md-6 mb-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Тест Rollbar</h5>
-                            <p class="card-text">Проверка системы мониторинга ошибок</p>
-                            <a href="{% url 'test_rollbar' %}" class="btn btn-warning">Тестировать Rollbar</a>
+                            <h5 class="card-title">Тест ошибки Rollbar</h5>
+                            <p class="card-text">Генерирует тестовую ошибку</p>
+                            <a href="{% url 'test_rollbar' %}" class="btn btn-warning">Тест ошибки</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Тест сообщения Rollbar</h5>
+                            <p class="card-text">Отправляет информационное сообщение</p>
+                            <a href="{% url 'test_rollbar_message' %}" class="btn btn-info">Тест сообщения</a>
                         </div>
                     </div>
                 </div>

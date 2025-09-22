@@ -34,9 +34,18 @@ def test_rollbar(request):
         rollbar.report_exc_info()
         return render(request, 'test_rollbar.html', {'error': str(e)})
 
+def test_rollbar_message(request):
+    """Тестовая страница для отправки сообщения в Rollbar"""
+    # Отправляем информационное сообщение
+    rollbar.report_message("Тестовое сообщение из Django", "info")
+    return render(request, 'test_rollbar.html', {
+        'error': 'Информационное сообщение отправлено в Rollbar'
+    })
+
 urlpatterns = [
     path('', index, name='home'),
     path('test-rollbar/', test_rollbar, name='test_rollbar'),
+    path('test-rollbar-message/', test_rollbar_message, name='test_rollbar_message'),
     path('users/', include('task_manager.users.urls', namespace='users')),
     path('tasks/', include('task_manager.tasks.urls', namespace='tasks')),
     path('statuses/', include('task_manager.statuses.urls', namespace='statuses')),
