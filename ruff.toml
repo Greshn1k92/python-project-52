@@ -3,5 +3,5 @@ exclude = [
     "**/settings.py",
 ]
 
-[tool.ruff.lint]
+[lint]
 select = ["E", "F", "W", "C90"]

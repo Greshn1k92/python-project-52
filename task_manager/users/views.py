@@ -21,7 +21,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     template_name = 'users/create.html'
     success_url = reverse_lazy('login')
     success_message = 'Пользователь успешно зарегистрирован'
-    
+
     def form_valid(self, form):
         # Сохраняем пользователя, но НЕ входим в систему
         user = form.save()
