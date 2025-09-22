@@ -108,6 +108,6 @@ ROLLBAR = {
     'root': str(BASE_DIR),
 }
 
-# Initialize Rollbar
-if ROLLBAR['access_token']:
+# Initialize Rollbar only once
+if ROLLBAR['access_token'] and not hasattr(rollbar, '_initialized'):
     rollbar.init(**ROLLBAR)
