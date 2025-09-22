@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.shortcuts import redirect
-from task_manager.users.forms import UserRegistrationForm, UserLoginForm
+from task_manager.users.forms import UserRegistrationForm, UserLoginForm, UserUpdateForm
 
 
 class UserListView(ListView):
@@ -33,7 +33,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
-    form_class = UserRegistrationForm
+    form_class = UserUpdateForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('users:users')
     success_message = 'Пользователь успешно изменен'
