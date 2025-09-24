@@ -9,6 +9,7 @@ makemigrations:
 
 migrate:
 	uv run python manage.py migrate
+	uv run python manage.py create_test_users
 
 setup:
 	uv run python manage.py migrate
