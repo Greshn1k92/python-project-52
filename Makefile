@@ -10,6 +10,10 @@ makemigrations:
 migrate:
 	uv run python manage.py migrate
 
+setup:
+	uv run python manage.py migrate
+	uv run python manage.py create_test_users
+
 collectstatic:
 	uv run python manage.py collectstatic --noinput
 
@@ -40,7 +44,8 @@ ci-install:
 
 ci-migrate:
 	uv run python manage.py makemigrations --noinput && \
-	uv run python manage.py migrate --noinput
+	uv run python manage.py migrate --noinput && \
+	uv run python manage.py create_test_users
 
 ci-test:
 	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest
