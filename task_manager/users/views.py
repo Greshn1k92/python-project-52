@@ -1,3 +1,4 @@
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -5,7 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from task_manager.users.forms import UserRegistrationForm, UserLoginForm, UserUpdateForm
 
 
@@ -74,17 +75,25 @@ class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         return super().post(request, *args, **kwargs)
 
 
-class UserLoginView(SuccessMessageMixin, LoginView):
-    form_class = UserLoginForm
-    template_name = 'users/login.html'
-    success_message = 'Вы залогинены'
-    next_page = reverse_lazy('home')
+def login_view(request):
+    """Функциональный view для входа с сообщением об успехе"""
+    if request.method == 'POST':
+        form = UserLoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Вы залогинены')
+                return redirect('home')
+            else:
+                messages.error(request, 'Неверные учетные данные')
+    else:
+        form = UserLoginForm()
     
-    def form_valid(self, form):
-        """Переопределяем form_valid для отображения сообщения об успешном входе"""
-        response = super().form_valid(form)
-        messages.success(self.request, self.success_message)
-        return response
+    return render(request, 'users/login.html', {'form': form})
 
 
 class UserLogoutView(LogoutView):

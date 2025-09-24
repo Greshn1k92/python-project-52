@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
 from django.contrib.auth import views as auth_views
-from task_manager.users.forms import UserLoginForm
+from task_manager.users.views import login_view
 import rollbar
 
 def index(request):
@@ -50,11 +50,7 @@ urlpatterns = [
     path('tasks/', include('task_manager.tasks.urls', namespace='tasks')),
     path('statuses/', include('task_manager.statuses.urls', namespace='statuses')),
     path('labels/', include('task_manager.labels.urls', namespace='labels')),
-    path('login/', auth_views.LoginView.as_view(
-        template_name='users/login.html',
-        form_class=UserLoginForm,
-        next_page='/'
-    ), name='login'),
+    path('login/', login_view, name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
 ]
