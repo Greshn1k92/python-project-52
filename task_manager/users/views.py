@@ -96,5 +96,8 @@ def login_view(request):
     return render(request, 'users/login.html', {'form': form})
 
 
-class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('home')
+def logout_view(request):
+    """Функциональный view для выхода с сообщением"""
+    logout(request)
+    messages.success(request, 'Вы разлогинены')
+    return redirect('home')
