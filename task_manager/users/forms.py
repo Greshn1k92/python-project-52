@@ -33,6 +33,12 @@ class UserUpdateForm(forms.ModelForm):
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Добавляем Bootstrap классы для полей входа
-        self.fields['username'].widget.attrs.update({'class': 'form-control'})
-        self.fields['password'].widget.attrs.update({'class': 'form-control'})
+        # Добавляем Bootstrap классы и placeholder для полей входа
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Имя пользователя'
+        })
+        self.fields['password'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Пароль'
+        })
