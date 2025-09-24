@@ -79,6 +79,12 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'users/login.html'
     success_message = 'Вы залогинены'
     next_page = reverse_lazy('home')
+    
+    def form_valid(self, form):
+        """Переопределяем form_valid для отображения сообщения об успешном входе"""
+        response = super().form_valid(form)
+        messages.success(self.request, self.success_message)
+        return response
 
 
 class UserLogoutView(LogoutView):
