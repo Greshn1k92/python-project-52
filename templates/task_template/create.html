@@ -30,6 +30,9 @@
         </div>
         <div class="mb-3">
             <label for="{{ form.executor.id_for_label }}" class="form-label">Исполнитель</label>
+            <!-- DEBUG: Показываем количество пользователей -->
+            <p>DEBUG: Всего пользователей в базе: {{ users|length }}</p>
+            <p>DEBUG: Пользователи: {% for user in users %}{{ user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             {{ form.executor }}
             {% if form.executor.errors %}
                 <div class="text-danger">{{ form.executor.errors }}</div>
