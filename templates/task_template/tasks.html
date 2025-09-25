@@ -22,18 +22,18 @@
     </div>
 </fieldset>
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <a href="{% url 'tasks:create_task' %}" class="btn btn-lg btn-primary fs-6 fw-bold">{% trans "Create task" %}</a>
+    <a href="{% url 'tasks:create_task' %}" class="btn btn-lg btn-primary fs-6 fw-bold">Создать задачу</a>
 </div>
         <div class="mb-5">    
     <table class="table table-striped table-bordered table-hover">
     <thead class="table-light">
         <tr>
           <th>ID</th>
-          <th>{% trans "Name" %}</th>
-          <th>{% trans "Status" %}</th>
-          <th>{% trans "Author" %}</th>
-          <th>{% trans "Executor" %}</th>
-          <th>{% trans "Created at" %}</th>
+          <th>Имя</th>
+          <th>Статус</th>
+          <th>Автор</th>
+          <th>Исполнитель</th>
+          <th>Дата создания</th>
           <th></th>
         </tr>
     </thead>
@@ -50,10 +50,10 @@
         <td>{{ task.created_at }}</td>
         <td>
             <p>
-                <a class="nav-link mb-2" href="{% url 'tasks:update_task' pk=task.id %}">{% trans "Update" %}</a>
+                <a class="nav-link mb-2" href="{% url 'tasks:update_task' pk=task.id %}">Изменить</a>
             </p>
         <p>
-            <a class="nav-link mb-2" href="{% url 'tasks:delete_task' pk=task.id %}">{% trans "Delete" %}</a>
+            <a class="nav-link mb-2" href="{% url 'tasks:delete_task' pk=task.id %}">Удалить</a>
         </p>
         </td>
         </tr>
