@@ -19,3 +19,5 @@ class TaskForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['executor'].queryset = User.objects.all()
         self.fields['executor'].required = False
+        # Добавляем пустую опцию в начало списка
+        self.fields['executor'].empty_label = "---------"
