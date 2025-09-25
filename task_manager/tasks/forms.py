@@ -16,6 +16,17 @@ class TaskForm(forms.ModelForm):
         # Добавляем пустую опцию для executor
         self.fields['executor'].empty_label = "---------"
         self.fields['executor'].required = False
+        
+        # Отладочная информация
+        users_count = User.objects.count()
+        print(f"DEBUG: В базе данных {users_count} пользователей")
+        users_list = list(User.objects.values_list('username', flat=True))
+        print(f"DEBUG: Пользователи: {users_list}")
+        
+        # Проверяем queryset для executor
+        executor_queryset = self.fields['executor'].queryset
+        print(f"DEBUG: Executor queryset содержит {executor_queryset.count()} пользователей")
+        print(f"DEBUG: Executor queryset: {list(executor_queryset.values_list('username', flat=True))}")
 
     status = forms.ModelChoiceField(
         queryset=Status.objects.all(),

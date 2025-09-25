@@ -30,6 +30,12 @@
         </div>
         <div class="mb-3">
             <label for="{{ form.executor.id_for_label }}" class="form-label">Исполнитель</label>
+            <!-- DEBUG: Отладочная информация -->
+            <div class="alert alert-info">
+                <strong>DEBUG:</strong> Пользователей в контексте: {{ users|length }}<br>
+                <strong>DEBUG:</strong> Пользователи: {% for user in users %}{{ user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
+                <strong>DEBUG:</strong> Executor field choices: {{ form.executor.field.queryset.count }}
+            </div>
             {{ form.executor }}
             {% if form.executor.errors %}
                 <div class="text-danger">{{ form.executor.errors }}</div>
