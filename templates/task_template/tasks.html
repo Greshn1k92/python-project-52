@@ -1,0 +1,65 @@
+{% extends "base_template/index.html" %}
+{% load i18n %}
+{% block content %}
+<div class="flex-column justify-content-center align-items-center px-3">
+    <h1>{% trans "Tasks" %}</h1> 
+    <main>
+<fieldset class="border p-3 mb-4 rounded">
+    <div class="card-body">
+        <form method="get" class="row g-3 align-items-end">
+            {% for field in filter.form %}
+            <div class="col-md-3"> 
+                <label for="{{ field.id_for_label }}" class="form-label small fw-bold mb-1">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+            </div>
+            {% endfor %}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-funnel"></i> {% trans "Apply filters" %}
+                    </button>
+        </form>
+    </div>
+</fieldset>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <a href="{% url 'tasks:create_task' %}" class="btn btn-lg btn-primary fs-6 fw-bold">{% trans "Create task" %}</a>
+</div>
+        <div class="mb-5">    
+    <table class="table table-striped table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>{% trans "Name" %}</th>
+          <th>{% trans "Status" %}</th>
+          <th>{% trans "Author" %}</th>
+          <th>{% trans "Executor" %}</th>
+          <th>{% trans "Created at" %}</th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in object_list %}
+        <tr>
+        <td>{{task.id}}</td>
+        <td>
+            <a class="nav-link mb-2" href="{% url 'tasks:task_detail' pk=task.id %}">{{ task.name }}</a>
+        </td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.author }}</td>
+        <td>{{ task.executor }}</td>
+        <td>{{ task.created_at }}</td>
+        <td>
+            <p>
+                <a class="nav-link mb-2" href="{% url 'tasks:update_task' pk=task.id %}">{% trans "Update" %}</a>
+            </p>
+        <p>
+            <a class="nav-link mb-2" href="{% url 'tasks:delete_task' pk=task.id %}">{% trans "Delete" %}</a>
+        </p>
+        </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+        </div>
+    </main>
+{% endblock %}

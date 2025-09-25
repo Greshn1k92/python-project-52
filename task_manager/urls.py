@@ -22,7 +22,7 @@ from task_manager.users.views import login_view, logout_view
 import rollbar
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'base_template/index.html')
 
 def test_rollbar(request):
     """Тестовая страница для проверки Rollbar"""

@@ -10,7 +10,7 @@ from .forms import StatusForm
 
 class StatusListView(LoginRequiredMixin, ListView):
     model = Status
-    template_name = 'task_statuses/statuses.html'
+    template_name = 'status_template/statuses.html'
     context_object_name = 'statuses'
     login_url = reverse_lazy('login')
 
@@ -18,7 +18,7 @@ class StatusListView(LoginRequiredMixin, ListView):
 class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Status
     form_class = StatusForm
-    template_name = 'task_statuses/create.html'
+    template_name = 'status_template/create.html'
     success_url = reverse_lazy('statuses:statuses')
     success_message = 'Статус успешно создан'
     login_url = reverse_lazy('login')
@@ -27,7 +27,7 @@ class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
-    template_name = 'task_statuses/update.html'
+    template_name = 'status_template/update.html'
     success_url = reverse_lazy('statuses:statuses')
     success_message = 'Статус успешно изменен'
     login_url = reverse_lazy('login')
@@ -35,7 +35,7 @@ class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
-    template_name = 'task_statuses/delete.html'
+    template_name = 'status_template/delete.html'
     success_url = reverse_lazy('statuses:statuses')
     success_message = 'Статус успешно удален'
     login_url = reverse_lazy('login')

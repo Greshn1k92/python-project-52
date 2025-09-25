@@ -10,7 +10,7 @@ from .forms import LabelForm
 
 class LabelListView(LoginRequiredMixin, ListView):
     model = Label
-    template_name = 'task_labels/labels.html'
+    template_name = 'label_template/labels.html'
     context_object_name = 'labels'
     login_url = reverse_lazy('login')
 
@@ -18,7 +18,7 @@ class LabelListView(LoginRequiredMixin, ListView):
 class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Label
     form_class = LabelForm
-    template_name = 'task_labels/create.html'
+    template_name = 'label_template/create.html'
     success_url = reverse_lazy('labels:labels')
     success_message = 'Метка успешно создана'
     login_url = reverse_lazy('login')
@@ -27,7 +27,7 @@ class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelForm
-    template_name = 'task_labels/update.html'
+    template_name = 'label_template/update.html'
     success_url = reverse_lazy('labels:labels')
     success_message = 'Метка успешно изменена'
     login_url = reverse_lazy('login')
@@ -35,7 +35,7 @@ class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Label
-    template_name = 'task_labels/delete.html'
+    template_name = 'label_template/delete.html'
     success_url = reverse_lazy('labels:labels')
     success_message = 'Метка успешно удалена'
     login_url = reverse_lazy('login')

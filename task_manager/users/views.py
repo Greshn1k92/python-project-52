@@ -12,14 +12,14 @@ from task_manager.users.forms import UserRegistrationForm, UserLoginForm, UserUp
 
 class UserListView(ListView):
     model = User
-    template_name = 'users/users.html'
+    template_name = 'base_template/users.html'
     context_object_name = 'users'
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
     form_class = UserRegistrationForm
-    template_name = 'users/create.html'
+    template_name = 'base_template/create.html'
     success_url = reverse_lazy('login')
     success_message = 'Пользователь успешно зарегистрирован'
 
@@ -35,7 +35,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserUpdateForm
-    template_name = 'users/update.html'
+    template_name = 'base_template/update.html'
     success_url = reverse_lazy('users:users')
     success_message = 'Пользователь успешно изменен'
     login_url = reverse_lazy('login')
@@ -51,7 +51,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = User
-    template_name = 'users/delete.html'
+    template_name = 'base_template/delete.html'
     success_url = reverse_lazy('users:users')
     success_message = 'Пользователь успешно удален'
     login_url = reverse_lazy('login')
@@ -93,7 +93,7 @@ def login_view(request):
     else:
         form = UserLoginForm()
     
-    return render(request, 'users/login.html', {'form': form})
+    return render(request, 'base_template/login.html', {'form': form})
 
 
 def logout_view(request):
