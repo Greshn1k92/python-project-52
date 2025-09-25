@@ -11,6 +11,9 @@ Django-based task management system.
 - ✅ Added test users creation for Playwright tests
 - ✅ Improved form validation and error handling
 - ✅ Enhanced user authentication flow
+- ✅ Fixed Playwright test selectors for better reliability
+- ✅ Added automatic test user creation in CI/CD pipeline
+- ✅ Resolved dropdown population issues in task creation
 
 ## Live Demo
 
