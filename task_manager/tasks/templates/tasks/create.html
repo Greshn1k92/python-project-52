@@ -34,7 +34,9 @@
             <div class="alert alert-info">
                 <strong>DEBUG:</strong> Пользователей в контексте: {{ users|length }}<br>
                 <strong>DEBUG:</strong> Пользователи: {% for user in users %}{{ user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
-                <strong>DEBUG:</strong> Executor field choices: {{ form.executor.field.queryset.count }}
+                <strong>DEBUG:</strong> Executor field choices: {{ form.executor.field.queryset.count }}<br>
+                <strong>DEBUG:</strong> Executor field ID: {{ form.executor.id_for_label }}<br>
+                <strong>DEBUG:</strong> Executor field HTML: {{ form.executor|safe }}
             </div>
             {{ form.executor }}
             {% if form.executor.errors %}
