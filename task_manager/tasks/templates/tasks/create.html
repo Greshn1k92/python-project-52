@@ -29,7 +29,7 @@
             {% endif %}
         </div>
         <div class="mb-3">
-            <label for="{{ form.executor.id_for_label }}" class="form-label">Исполнитель</label>
+            <label for="{{ form.executor.id_for_label }}" class="form-label" data-testid="executor-label">Исполнитель</label>
             <!-- DEBUG: Отладочная информация -->
             <div class="alert alert-info">
                 <strong>DEBUG:</strong> Пользователей в контексте: {{ users|length }}<br>
@@ -38,7 +38,13 @@
                 <strong>DEBUG:</strong> Executor field ID: {{ form.executor.id_for_label }}<br>
                 <strong>DEBUG:</strong> Executor field HTML: {{ form.executor|safe }}
             </div>
-            {{ form.executor }}
+            <!-- Используем ручной рендеринг select с правильными атрибутами -->
+            <select name="executor" id="{{ form.executor.id_for_label }}" class="form-select form-select-sm" data-testid="executor-select">
+                <option value="">---------</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.get_full_name|default:user.username }}</option>
+                {% endfor %}
+            </select>
             {% if form.executor.errors %}
                 <div class="text-danger">{{ form.executor.errors }}</div>
             {% endif %}
