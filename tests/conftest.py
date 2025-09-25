@@ -39,13 +39,27 @@ DATA = {
             "name": "Тестовая задача",
             "description": "Описание тестовой задачи",
             "status": "В работе",
-            "executor": "Test User"
+            "executor": "Test User",
+            "labels": {
+                "first": "Важно",
+                "third": "Срочно"
+            }
         },
         "second": {
             "name": "Вторая задача",
             "description": "Описание второй задачи", 
             "status": "Завершено",
-            "executor": "Another User"
+            "executor": "Another User",
+            "labels": {
+                "first": "Важно",
+                "second": "Срочно"
+            }
+        },
+        "third": {
+            "name": "Третья задача",
+            "description": "Описание третьей задачи",
+            "status": "В работе",
+            "executor": "Test User"
         }
     }
 }

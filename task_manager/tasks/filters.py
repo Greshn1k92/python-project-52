@@ -25,7 +25,7 @@ class TaskFilter(django_filters.FilterSet):
     )
     author = django_filters.BooleanFilter(
         method='filter_author',
-        label="Только мои задачи",
+        label="Только свои задачи",
         required=False
     )
 
