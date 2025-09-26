@@ -1,7 +1,7 @@
-# tests/conftest.py
 import pytest
-from playwright.sync_api import Page
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 DATA = {
     "users": {
@@ -20,10 +20,10 @@ DATA = {
     },
     "statuses": {
         "first": {
-            "name": "В работе"
+            "name": "Новый"
         },
         "second": {
-            "name": "Завершено"
+            "name": "В работе"
         }
     },
     "labels": {
@@ -36,45 +36,32 @@ DATA = {
     },
     "tasks": {
         "first": {
-            "name": "Тестовая задача",
-            "description": "Описание тестовой задачи",
-            "status": "В работе",
-            "executor": "Test User",
-            "labels": {
-                "first": "Важно",
-                "third": "Срочно"
-            }
+            "name": "Первая задача",
+            "description": "Описание первой задачи",
+            "status": "Новый",
+            "executor": "Test User"
         },
         "second": {
-            "name": "Вторая задача",
-            "description": "Описание второй задачи", 
-            "status": "Завершено",
-            "executor": "Another User",
-            "labels": {
-                "first": "Важно",
-                "second": "Срочно"
-            }
+            "name": "Вторая задача", 
+            "description": "Описание второй задачи",
+            "status": "В работе",
+            "executor": "Another User"
         },
         "third": {
             "name": "Третья задача",
-            "description": "Описание третьей задачи",
-            "status": "В работе",
+            "description": "Описание третьей задачи", 
+            "status": "Новый",
             "executor": "Test User"
         }
     }
 }
 
-
-def login(page: Page, context):
-    """Функция для входа в систему"""
-    page.goto("/login/")
-    page.fill('input[name="username"]', DATA["users"]["first"]["username"])
-    page.fill('input[name="password"]', DATA["users"]["first"]["password"])
-    page.click('button[type="submit"]')
-    page.wait_for_load_state()
-
-
 @pytest.fixture
-def context():
-    """Фикстура для контекста тестов"""
-    return {}
+def login(page, context):
+    def _login(username="test_user", password="testpass123"):
+        page.goto("/login/")
+        page.fill('input[name="username"]', username)
+        page.fill('input[name="password"]', password)
+        page.click('button[type="submit"]')
+        page.wait_for_load_state()
+    return _login

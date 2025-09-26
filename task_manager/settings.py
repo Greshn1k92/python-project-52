@@ -111,3 +111,6 @@ ROLLBAR = {
 # Initialize Rollbar only once
 if ROLLBAR['access_token'] and not hasattr(rollbar, '_initialized'):
     rollbar.init(**ROLLBAR)
+
+# Custom User model
+AUTH_USER_MODEL = 'users.User'

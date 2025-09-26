@@ -21,7 +21,7 @@ class TaskListView(LoginRequiredMixin, FilterView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        from django.contrib.auth.models import User
+        from task_manager.users.models import User
         context['users'] = User.objects.all()  # ← Передать в контекст
         return context
 
@@ -43,7 +43,7 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        from django.contrib.auth.models import User
+        from task_manager.users.models import User
         
         # Отладочная информация
         users_count = User.objects.count()
@@ -67,6 +67,12 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('tasks:tasks')
     success_message = 'Задача успешно изменена'
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from task_manager.users.models import User
+        context['users'] = User.objects.all()  # ← Передать в контекст
+        return context
 
     def get(self, request, *args, **kwargs):
         task = self.get_object()

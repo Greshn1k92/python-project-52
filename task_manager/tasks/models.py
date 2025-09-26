@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 
@@ -9,11 +9,11 @@ class Task(models.Model):
     description = models.TextField(blank=True, verbose_name='Описание')
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name='Статус')
     author = models.ForeignKey(
-        User, on_delete=models.PROTECT,
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT,
         related_name='authored_tasks', verbose_name='Автор'
     )
     executor = models.ForeignKey(
-        User, on_delete=models.PROTECT,
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT,
         related_name='assigned_tasks', blank=True, null=True,
         verbose_name='Исполнитель'
     )

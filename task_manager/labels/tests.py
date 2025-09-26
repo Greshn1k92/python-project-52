@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from django.contrib.auth.models import User
+from task_manager.users.models import User
 from django.urls import reverse
 from task_manager.labels.models import Label
 from task_manager.tasks.models import Task
