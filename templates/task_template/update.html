@@ -28,18 +28,11 @@
                 <div class="text-danger">{{ form.status.errors }}</div>
             {% endif %}
         </div>
-        <div class="mb-3">
-            <label for="id_executor" class="form-label">Исполнитель</label>
-            <select name="executor" id="id_executor" class="form-select">
-                <option value="">----------</option>
-                {% for user in users %}
-                    <option value="{{ user.id }}" {% if user.id == task.executor.id %}selected{% endif %}>
-                        {{ user.get_full_name|default:user.username }} <!-- Полное имя, а не username -->
-                    </option>
-                {% endfor %}
-            </select>
+        <div class="form-group">
+            {{ form.executor.label_tag }}
+            {{ form.executor }}
             {% if form.executor.errors %}
-                <div class="text-danger">{{ form.executor.errors }}</div>
+            <div class="text-danger">{{ form.executor.errors }}</div>
             {% endif %}
         </div>
         <div class="mb-3">

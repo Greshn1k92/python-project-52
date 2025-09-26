@@ -19,12 +19,6 @@ class TaskListView(LoginRequiredMixin, FilterView):
     paginate_by = 10
     ordering = ['-created_at']
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        from task_manager.users.models import User
-        context['users'] = User.objects.all()  # ← Передать в контекст
-        return context
-
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
@@ -43,16 +37,6 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        from task_manager.users.models import User
-        
-        # Отладочная информация
-        users_count = User.objects.count()
-        print(f"DEBUG VIEW: В базе данных {users_count} пользователей")
-        users_list = list(User.objects.values_list('username', flat=True))
-        print(f"DEBUG VIEW: Пользователи: {users_list}")
-        
-        context['users'] = User.objects.all()
-        print(f"DEBUG VIEW: Передаем в контекст {len(context['users'])} пользователей")
         return context
 
     def form_valid(self, form):
@@ -70,8 +54,6 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        from task_manager.users.models import User
-        context['users'] = User.objects.all()  # ← Передать в контекст
         return context
 
     def get(self, request, *args, **kwargs):

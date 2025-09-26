@@ -28,20 +28,11 @@
                 <div class="text-danger">{{ form.status.errors }}</div>
             {% endif %}
         </div>
-        <div class="mb-3">
-            <label for="id_executor" class="form-label">Исполнитель</label>
-            <!-- DEBUG: Показываем количество пользователей -->
-            <p>DEBUG: Всего пользователей в базе: {{ users|length }}</p>
-            <p>DEBUG: Пользователи: {% for user in users %}{{ user.username }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-            <!-- Убедитесь, что есть что-то подобное -->
-            <select name="executor" id="id_executor" class="form-select">
-                <option value="">---------</option>
-                {% for user in users %}
-                <option value="{{ user.id }}">{{ user.get_full_name|default:user.username }}</option>
-                {% endfor %}
-            </select>
+        <div class="form-group">
+            {{ form.executor.label_tag }}
+            {{ form.executor }}
             {% if form.executor.errors %}
-                <div class="text-danger">{{ form.executor.errors }}</div>
+            <div class="text-danger">{{ form.executor.errors }}</div>
             {% endif %}
         </div>
         <div class="mb-3">
