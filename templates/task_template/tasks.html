@@ -62,16 +62,12 @@
             <a class="nav-link mb-2" href="{% url 'tasks:task_detail' pk=task.id %}">{{ task.name }}</a>
         </td>
         <td>{{ task.status }}</td>
-        <td>{{ task.author }}</td>
-        <td>{{ task.executor }}</td>
+        <td>{{ task.author.get_full_name|default:task.author.username }}</td>
+        <td>{{ task.executor.get_full_name|default:task.executor.username|default:"Не назначен" }}</td>
         <td>{{ task.created_at }}</td>
         <td>
-            <p>
-                <a class="nav-link mb-2" href="{% url 'tasks:update_task' pk=task.id %}">{% trans "Update" %}</a>
-            </p>
-        <p>
-            <a class="nav-link mb-2" href="{% url 'tasks:delete_task' pk=task.id %}">{% trans "Delete" %}</a>
-        </p>
+            <a class="btn btn-primary btn-sm" href="{% url 'tasks:update_task' pk=task.id %}">Изменить</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'tasks:delete_task' pk=task.id %}">Удалить</a>
         </td>
         </tr>
         {% endfor %}
