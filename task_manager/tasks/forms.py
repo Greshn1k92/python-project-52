@@ -27,12 +27,18 @@ class TaskForm(forms.ModelForm):
         queryset=User.objects.all(),
         empty_label="----------",
         required=False,
-        widget=UserSelectWidget(attrs={'class': 'form-select'})
+        widget=UserSelectWidget(attrs={'class': 'form-select form-select-sm'})
     )
     
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'status': forms.Select(attrs={'class': 'form-select form-select-sm'}),
+            'labels': forms.SelectMultiple(attrs={'class': 'form-select form-select-sm'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

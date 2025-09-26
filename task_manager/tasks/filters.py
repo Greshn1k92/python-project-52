@@ -1,8 +1,10 @@
 import django_filters
+from django import forms
 from task_manager.users.models import User
 from .models import Task
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
+from .forms import UserSelectWidget
 
 
 class TaskFilter(django_filters.FilterSet):
@@ -10,18 +12,21 @@ class TaskFilter(django_filters.FilterSet):
         queryset=Status.objects.all(),
         empty_label="Все статусы",
         label="Статус",
-        required=False
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     executor = django_filters.ModelChoiceFilter(
         queryset=User.objects.all(),
         empty_label="Все исполнители",
         label="Исполнитель",
-        required=False
+        required=False,
+        widget=UserSelectWidget(attrs={'class': 'form-select form-select-sm'})
     )
     labels = django_filters.ModelMultipleChoiceFilter(
         queryset=Label.objects.all(),
         label="Метка",
-        required=False
+        required=False,
+        widget=forms.SelectMultiple(attrs={'class': 'form-select form-select-sm'})
     )
     author = django_filters.BooleanFilter(
         method='filter_author',

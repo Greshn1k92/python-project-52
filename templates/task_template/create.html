@@ -28,8 +28,8 @@
                 <div class="text-danger">{{ form.status.errors }}</div>
             {% endif %}
         </div>
-        <div class="form-group">
-            <label for="{{ form.executor.id_for_label }}">Исполнитель</label>
+        <div class="mb-3">
+            <label for="{{ form.executor.id_for_label }}" class="form-label">Исполнитель</label>
             {{ form.executor }}
             {% if form.executor.errors %}
             <div class="text-danger">{{ form.executor.errors }}</div>
