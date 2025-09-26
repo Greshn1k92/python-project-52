@@ -16,15 +16,10 @@
                     <label for="{{ field.id_for_label }}" class="form-check-label">{{ field.label }}</label>
                 </div>
                 {% elif field.name == 'executor' %}
-                <!-- Специальная обработка для поля "Исполнитель" в фильтре -->
+                <!-- Используем стандартное поле фильтра -->
                 <div class="form-group">
                     <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                    <select name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-select">
-                        <option value="">---------</option>
-                        {% for user in users %}
-                        <option value="{{ user.id }}">{{ user.get_full_name|default:user.username }}</option>
-                        {% endfor %}
-                    </select>
+                    {{ field }}
                 </div>
                 {% else %}
                 <label for="{{ field.id_for_label }}" class="form-label small fw-bold mb-1">
