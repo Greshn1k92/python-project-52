@@ -62,7 +62,7 @@
         <td>{{ task.created_at }}</td>
         <td>
             <a class="btn btn-primary btn-sm" href="{% url 'tasks:update_task' pk=task.id %}">Изменить</a>
-            <a class="btn btn-danger btn-sm" href="{% url 'tasks:delete_task' pk=task.id %}?immediate=true">Удалить</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'tasks:delete_task' pk=task.id %}">Удалить</a>
         </td>
         </tr>
         {% endfor %}
