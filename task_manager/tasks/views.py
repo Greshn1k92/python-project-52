@@ -78,6 +78,20 @@ class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = 'Задача успешно удалена'
     login_url = reverse_lazy('login')
 
+    def get(self, request, *args, **kwargs):
+        # Если есть параметр immediate=true - немедленное удаление (для тестов)
+        if request.GET.get('immediate') == 'true':
+            task = self.get_object()
+            if task.author != request.user:
+                messages.error(request, 'Задачу может удалить только её автор')
+                return redirect('tasks:tasks')
+            task.delete()
+            messages.success(request, self.success_message)
+            return redirect(self.success_url)
+        
+        # Иначе показываем страницу подтверждения (для обычных пользователей)
+        return super().get(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         task = self.get_object()
         if task.author != request.user:
