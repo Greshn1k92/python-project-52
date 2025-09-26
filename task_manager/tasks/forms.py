@@ -13,7 +13,7 @@ class TaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Убедитесь, что поле executor правильно настроено
-        self.fields['executor'].empty_label = None  # или "----------"
+        self.fields['executor'].empty_label = "----------"
         self.fields['executor'].label = "Исполнитель"
 
     def clean_name(self):
