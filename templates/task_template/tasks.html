@@ -9,10 +9,18 @@
         <form method="get" class="row g-3 align-items-end">
             {% for field in filter.form %}
             <div class="col-md-3"> 
+                {% if field.name == 'author' %}
+                <!-- Специальная обработка для чекбокса "Только свои задачи" -->
+                <div class="form-check">
+                    <input type="checkbox" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-check-input" {% if field.value %}checked{% endif %}>
+                    <label for="{{ field.id_for_label }}" class="form-check-label">{{ field.label }}</label>
+                </div>
+                {% else %}
                 <label for="{{ field.id_for_label }}" class="form-label small fw-bold mb-1">
                     {{ field.label }}
                 </label>
                 {{ field }}
+                {% endif %}
             </div>
             {% endfor %}
                     <button type="submit" class="btn btn-primary">
