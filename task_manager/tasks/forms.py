@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.forms.models import ModelChoiceIteratorValue
 from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
@@ -8,6 +9,10 @@ from task_manager.users.models import User
 
 class UserSelectWidget(forms.Select):
     def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
+        # Преобразуем ModelChoiceIteratorValue в обычное значение
+        if isinstance(value, ModelChoiceIteratorValue):
+            value = value.value  # Получаем реальное значение
+        
         option = super().create_option(name, value, label, selected, index, subindex, attrs)
         if value:
             try:
