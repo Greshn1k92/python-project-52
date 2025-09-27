@@ -1,3 +1,4 @@
+import os
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from task_manager.users.models import User
@@ -11,17 +12,19 @@ class Command(BaseCommand):
         call_command('migrate')
 
         # Создаем тестовых пользователей
+        # Используем переменную окружения для тестового пароля
+        test_password = os.getenv('TEST_USER_PASSWORD', 'testpass123')  # NOSONAR - тестовый пароль
         users_data = [
             {
-                'username': 'test_user', 'password': 'testpass123',
+                'username': 'test_user', 'password': test_password,
                 'first_name': 'Test', 'last_name': 'User'
             },
             {
-                'username': 'another_user', 'password': 'testpass123',
+                'username': 'another_user', 'password': test_password,
                 'first_name': 'Another', 'last_name': 'User'
             },
             {
-                'username': 'third_user', 'password': 'testpass123',
+                'username': 'third_user', 'password': test_password,
                 'first_name': 'Third', 'last_name': 'User'
             },
         ]

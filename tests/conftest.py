@@ -1,19 +1,23 @@
+import os
 import pytest
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+# Используем переменную окружения для тестового пароля
+TEST_PASSWORD = os.getenv('TEST_USER_PASSWORD', 'testpass123')
+
 DATA = {
     "users": {
         "first": {
             "username": "test_user",
-            "password": "testpass123",
+            "password": TEST_PASSWORD,
             "first_name": "Test",
             "last_name": "User"
         },
         "second": {
             "username": "another_user",
-            "password": "testpass123",
+            "password": TEST_PASSWORD,
             "first_name": "Another",
             "last_name": "User"
         }
