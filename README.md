@@ -4,7 +4,6 @@
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Greshn1k92_python-project-52&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Greshn1k92_python-project-52)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Greshn1k92_python-project-52&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Greshn1k92_python-project-52)
 
 Django-based task management system with user authentication, task creation, status management, and label system.
 

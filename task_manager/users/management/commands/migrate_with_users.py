@@ -13,7 +13,9 @@ class Command(BaseCommand):
 
         # Создаем тестовых пользователей
         # Используем переменную окружения для тестового пароля
-        test_password = os.getenv('TEST_USER_PASSWORD', 'testpass123')  # NOSONAR - тестовый пароль
+        test_password = os.getenv(
+            'TEST_USER_PASSWORD', 'testpass123'
+        )  # NOSONAR - тестовый пароль
         users_data = [
             {
                 'username': 'test_user', 'password': test_password,
