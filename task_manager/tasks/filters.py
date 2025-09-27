@@ -26,7 +26,8 @@ class TaskFilter(django_filters.FilterSet):
         queryset=Label.objects.all(),
         label="Метка",
         required=False,
-        widget=forms.SelectMultiple(attrs={'class': 'form-select form-select-sm'})
+        widget=forms.SelectMultiple(
+            attrs={'class': 'form-select form-select-sm'})
     )
     author = django_filters.BooleanFilter(
         method='filter_author',

@@ -46,7 +46,7 @@ class UserCRUDTestCase(TestCase):
             'password2': 'newpass123'
         }
         response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 302)  # Redirect after successful update
+        self.assertEqual(response.status_code, 302)  # Redirect after update
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, 'Updated')
 

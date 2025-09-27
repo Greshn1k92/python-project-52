@@ -14,7 +14,8 @@ class TestTask:
             DATA["tasks"]["first"]["description"])
         page.select_option(
             'select[name="status"]', label=DATA["tasks"]["first"]["status"])
-        page.select_option('#id_executor', label=DATA["tasks"]["first"]["executor"])
+        page.select_option(
+            '#id_executor', label=DATA["tasks"]["first"]["executor"])
         page.click('button[type="submit"]')
         page.wait_for_load_state()
         assert page.url == urljoin(base_url, "/tasks/")
@@ -32,7 +33,8 @@ class TestTask:
             DATA["tasks"]["second"]["description"])
         page.select_option(
             'select[name="status"]', label=DATA["tasks"]["second"]["status"])
-        page.select_option('#id_executor', label=DATA["tasks"]["second"]["executor"])
+        page.select_option(
+            '#id_executor', label=DATA["tasks"]["second"]["executor"])
         page.click('button[type="submit"]')
         page.wait_for_load_state()
         assert page.url == urljoin(base_url, "/tasks/")

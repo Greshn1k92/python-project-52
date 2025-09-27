@@ -40,7 +40,8 @@ class LabelCRUDTestCase(TestCase):
     def test_label_update_requires_login(self):
         """Тест: редактирование метки требует авторизации"""
         label = Label.objects.create(name='Тестовая метка')
-        response = self.client.get(reverse('labels:update_label', args=[label.pk]))
+        response = self.client.get(
+            reverse('labels:update_label', args=[label.pk]))
         self.assertEqual(response.status_code, 302)
 
     def test_label_update_success(self):
@@ -58,14 +59,16 @@ class LabelCRUDTestCase(TestCase):
     def test_label_delete_requires_login(self):
         """Тест: удаление метки требует авторизации"""
         label = Label.objects.create(name='Тестовая метка')
-        response = self.client.get(reverse('labels:delete_label', args=[label.pk]))
+        response = self.client.get(
+            reverse('labels:delete_label', args=[label.pk]))
         self.assertEqual(response.status_code, 302)
 
     def test_label_delete_success(self):
         """Тест: успешное удаление метки"""
         label = Label.objects.create(name='Тестовая метка')
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.post(reverse('labels:delete_label', args=[label.pk]))
+        response = self.client.post(
+            reverse('labels:delete_label', args=[label.pk]))
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Label.objects.filter(pk=label.pk).exists())
 
@@ -81,7 +84,8 @@ class LabelCRUDTestCase(TestCase):
         task.labels.add(label)
 
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.post(reverse('labels:delete_label', args=[label.pk]))
+        response = self.client.post(
+            reverse('labels:delete_label', args=[label.pk]))
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Label.objects.filter(pk=label.pk).exists())
 

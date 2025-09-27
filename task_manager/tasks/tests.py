@@ -115,13 +115,15 @@ class TaskCRUDTestCase(TestCase):
 
         # Попытка удаления другим пользователем
         self.client.login(username='otheruser', password='testpass123')
-        response = self.client.post(reverse('tasks:delete_task', args=[task.pk]))
+        response = self.client.post(
+            reverse('tasks:delete_task', args=[task.pk]))
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Task.objects.filter(pk=task.pk).exists())
 
         # Удаление автором
         self.client.login(username='testuser', password='testpass123')
-        response = self.client.post(reverse('tasks:delete_task', args=[task.pk]))
+        response = self.client.post(
+            reverse('tasks:delete_task', args=[task.pk]))
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Task.objects.filter(pk=task.pk).exists())
 
@@ -200,7 +202,8 @@ class TaskFilterTestCase(TestCase):
     def test_filter_by_status(self):
         """Тест: фильтрация по статусу"""
         self.client.login(username='user1', password='testpass123')
-        response = self.client.get(reverse('tasks:tasks'), {'status': self.status1.id})
+        response = self.client.get(
+            reverse('tasks:tasks'), {'status': self.status1.id})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Задача 1')
         self.assertContains(response, 'Задача 3')
@@ -209,7 +212,8 @@ class TaskFilterTestCase(TestCase):
     def test_filter_by_executor(self):
         """Тест: фильтрация по исполнителю"""
         self.client.login(username='user1', password='testpass123')
-        response = self.client.get(reverse('tasks:tasks'), {'executor': self.user2.id})
+        response = self.client.get(
+            reverse('tasks:tasks'), {'executor': self.user2.id})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Задача 1')
         self.assertNotContains(response, 'Задача 2')
@@ -218,7 +222,8 @@ class TaskFilterTestCase(TestCase):
     def test_filter_by_label(self):
         """Тест: фильтрация по метке"""
         self.client.login(username='user1', password='testpass123')
-        response = self.client.get(reverse('tasks:tasks'), {'labels': self.label1.id})
+        response = self.client.get(
+            reverse('tasks:tasks'), {'labels': self.label1.id})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Задача 1')
         self.assertNotContains(response, 'Задача 2')

@@ -34,7 +34,8 @@ class Command(BaseCommand):
             else:
                 self.stdout.write(
                     self.style.WARNING(
-                        f"User '{user_data['username']}' already exists. Skipping."))
+                        f"User '{user_data['username']}' already exists. "
+                        "Skipping."))
 
         self.stdout.write(
             self.style.SUCCESS('Migration and test users creation completed'))

@@ -6,7 +6,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from task_manager.users.forms import UserRegistrationForm, UserLoginForm, UserUpdateForm
+from task_manager.users.forms import (
+    UserRegistrationForm, UserLoginForm, UserUpdateForm)
 
 
 class UserListView(ListView):
@@ -68,7 +69,8 @@ class UserDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         if user.authored_tasks.exists() or user.assigned_tasks.exists():
             messages.error(
                 request,
-                'Невозможно удалить пользователя, потому что он связан с задачами'
+                'Невозможно удалить пользователя, '
+            'потому что он связан с задачами'
             )
             return redirect('users:users')
         return super().post(request, *args, **kwargs)

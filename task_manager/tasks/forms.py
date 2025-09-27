@@ -35,8 +35,10 @@ class TaskForm(forms.ModelForm):
         fields = ['name', 'description', 'status', 'executor', 'labels']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'status': forms.Select(attrs={'class': 'form-select form-select-sm'}),
+            'description': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': 3}),
+            'status': forms.Select(
+                attrs={'class': 'form-select form-select-sm'}),
             'labels': forms.SelectMultiple(
                 attrs={'class': 'form-select form-select-sm'}),
         }
