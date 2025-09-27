@@ -22,7 +22,7 @@ run:
 	uv run python manage.py runserver
 
 render-start:
-	uv run gunicorn wsgi
+	uv run gunicorn task_manager.wsgi:application
 
 build:
 	./build.sh
