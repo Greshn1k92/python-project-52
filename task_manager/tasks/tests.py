@@ -260,4 +260,4 @@ class TaskFilterTestCase(TestCase):
         self.assertContains(response, 'Статус')
         self.assertContains(response, 'Исполнитель')
         self.assertContains(response, 'Метка')
-        self.assertContains(response, 'Только мои задачи')
+        self.assertContains(response, 'Только свои задачи')
