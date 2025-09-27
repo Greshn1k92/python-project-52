@@ -92,7 +92,7 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
     def delete(self, request, *args, **kwargs):
         task = self.get_object()
         task.delete()
-        messages.success(request, 'Task deleted successfully!')
+        messages.success(request, 'Задача успешно удалена')
         return redirect(self.success_url)
 
     def get_context_data(self, **kwargs):
