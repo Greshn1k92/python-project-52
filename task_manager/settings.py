@@ -114,3 +114,12 @@ if ROLLBAR['access_token'] and not hasattr(rollbar, '_initialized'):
 
 # Custom User model
 AUTH_USER_MODEL = 'users.User'
+
+# Messages framework settings
+MESSAGE_TAGS = {
+    50: 'danger',  # ERROR
+    40: 'warning', # WARNING
+    30: 'info',    # INFO
+    25: 'success', # SUCCESS
+    20: 'info',    # DEBUG
+}
