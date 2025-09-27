@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from task_manager.users.models import User
 
+
 class Command(BaseCommand):
     help = 'Runs migrations and creates test users'
 

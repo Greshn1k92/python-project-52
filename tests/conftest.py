@@ -56,6 +56,7 @@ DATA = {
     }
 }
 
+
 @pytest.fixture
 def login(page, context):
     def _login(username="test_user", password="testpass123"):

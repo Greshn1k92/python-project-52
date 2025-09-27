@@ -1,6 +1,7 @@
 from urllib.parse import urljoin
 from .conftest import login, DATA
 
+
 class TestTask:
     def test_create_show(self, page, context, base_url):
         login(page, context)

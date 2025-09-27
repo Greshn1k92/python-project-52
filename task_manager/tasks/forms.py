@@ -22,6 +22,7 @@ class UserSelectWidget(forms.Select):
                 pass
         return option
 
+
 class TaskForm(forms.ModelForm):
     executor = forms.ModelChoiceField(
         queryset=User.objects.all(),

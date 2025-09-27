@@ -20,8 +20,10 @@ from django.shortcuts import render
 from task_manager.users.views import login_view, logout_view
 import rollbar
 
+
 def index(request):
     return render(request, 'base_template/index.html')
+
 
 def test_rollbar(request):
     """Тестовая страница для проверки Rollbar"""
@@ -33,6 +35,7 @@ def test_rollbar(request):
         rollbar.report_exc_info()
         return render(request, 'test_rollbar.html', {'error': str(e)})
 
+
 def test_rollbar_message(request):
     """Тестовая страница для отправки сообщения в Rollbar"""
     # Отправляем информационное сообщение
@@ -40,6 +43,7 @@ def test_rollbar_message(request):
     return render(request, 'test_rollbar.html', {
         'error': 'Информационное сообщение отправлено в Rollbar'
     })
+
 
 urlpatterns = [
     path('', index, name='home'),
