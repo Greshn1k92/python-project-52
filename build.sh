@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
-# скачиваем uv
-curl -LsSf https://astral.sh/uv/install.sh | sh
-source $HOME/.local/bin/env
+# Exit on any error
+set -e
 
+# Install dependencies
+pip install -r requirements.txt
 
-make install && make makemigrations && make migrate && make collectstatic
+# Run migrations
+python manage.py makemigrations
+python manage.py migrate
+
+# Collect static files
+python manage.py collectstatic --noinput
+
+# Create superuser if it doesn't exist
+python manage.py shell -c "
+from django.contrib.auth import get_user_model
+User = get_user_model()
+if not User.objects.filter(username='admin').exists():
+    User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
+"
