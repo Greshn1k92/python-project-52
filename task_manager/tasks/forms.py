@@ -1,19 +1,19 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.forms.models import ModelChoiceIteratorValue
-from task_manager.labels.models import Label
-from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
 from task_manager.users.models import User
 
 
 class UserSelectWidget(forms.Select):
-    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
+    def create_option(self, name, value, label, selected, index,
+                      subindex=None, attrs=None):
         # Преобразуем ModelChoiceIteratorValue в обычное значение
         if isinstance(value, ModelChoiceIteratorValue):
             value = value.value  # Получаем реальное значение
-        
-        option = super().create_option(name, value, label, selected, index, subindex, attrs)
+
+        option = super().create_option(
+            name, value, label, selected, index, subindex, attrs)
         if value:
             try:
                 user = User.objects.get(pk=value)
@@ -29,7 +29,7 @@ class TaskForm(forms.ModelForm):
         required=False,
         widget=UserSelectWidget(attrs={'class': 'form-select form-select-sm'})
     )
-    
+
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
@@ -37,7 +37,8 @@ class TaskForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'status': forms.Select(attrs={'class': 'form-select form-select-sm'}),
-            'labels': forms.SelectMultiple(attrs={'class': 'form-select form-select-sm'}),
+            'labels': forms.SelectMultiple(
+                attrs={'class': 'form-select form-select-sm'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -46,7 +47,7 @@ class TaskForm(forms.ModelForm):
         self.fields['executor'].label = "Исполнитель"
         # Настраиваем queryset для отображения полных имен
         self.fields['executor'].queryset = User.objects.all()
-        
+
     def clean_executor(self):
         executor = self.cleaned_data.get('executor')
         return executor

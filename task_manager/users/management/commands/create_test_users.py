@@ -34,7 +34,7 @@ class Command(BaseCommand):
         for user_data in users_data:
             username = user_data['username']
             if not User.objects.filter(username=username).exists():
-                user = User.objects.create_user(
+                User.objects.create_user(
                     username=username,
                     first_name=user_data['first_name'],
                     last_name=user_data['last_name'],

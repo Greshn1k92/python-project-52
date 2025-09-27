@@ -21,12 +21,15 @@ class UserRegistrationForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     password1 = forms.CharField(
         label='Пароль',
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Новый пароль'}),
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'Новый пароль'}),
         required=False
     )
     password2 = forms.CharField(
         label='Подтверждение пароля',
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Подтвердите новый пароль'}),
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control',
+                   'placeholder': 'Подтвердите новый пароль'}),
         required=False
     )
 

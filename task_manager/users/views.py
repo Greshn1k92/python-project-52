@@ -1,5 +1,4 @@
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import User
@@ -83,7 +82,7 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=username, password=password)
-            
+
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Вы залогинены')
@@ -92,7 +91,7 @@ def login_view(request):
                 messages.error(request, 'Неверные учетные данные')
     else:
         form = UserLoginForm()
-    
+
     return render(request, 'base_template/login.html', {'form': form})
 
 

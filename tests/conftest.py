@@ -12,7 +12,7 @@ DATA = {
             "last_name": "User"
         },
         "second": {
-            "username": "another_user", 
+            "username": "another_user",
             "password": "testpass123",
             "first_name": "Another",
             "last_name": "User"
@@ -42,14 +42,14 @@ DATA = {
             "executor": "Test User"
         },
         "second": {
-            "name": "Вторая задача", 
+            "name": "Вторая задача",
             "description": "Описание второй задачи",
             "status": "В работе",
             "executor": "Another User"
         },
         "third": {
             "name": "Третья задача",
-            "description": "Описание третьей задачи", 
+            "description": "Описание третьей задачи",
             "status": "Новый",
             "executor": "Test User"
         }
